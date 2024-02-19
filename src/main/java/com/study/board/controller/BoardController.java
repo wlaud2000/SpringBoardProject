@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -36,5 +37,13 @@ public class BoardController {
         model.addAttribute("list", boardService.boardList());
 
         return "boardlist";
+    }
+
+
+    @GetMapping("board/view") //localhost:8080/board/view?id=1하면 1이 id안으로 들어감
+    public String boardView(Model model, @RequestParam(name = "id") Integer id){
+
+        model.addAttribute("board", boardService.boardView(id));
+        return "boardview";
     }
 }
